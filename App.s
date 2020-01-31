@@ -22,20 +22,21 @@ NEGCODE EQU 0xb
 ; r2 points to the CLEAR register
 
   ldr r3, =0x00000419         ; num = 1049
-  mov r9, =0x000f0000         ; reset_mask = 0x000f0000
+  ldr r9, =0x000f0000         ; reset_mask = 0x000f0000
 whileT                        ; while(true)
                               ; {
-whilei
   cmp r3, #0                  ;   if (num < 0)
   bge eif2                    ;   {
   mov r5, #NEGCODE            ;     neg_code = 0b1011
   mov r5, r5, lsl #4          ;     neg_code <<= 4
   ldr  r5,=4000000            ;     delay(500ms)
+eif2					      ;   }
 dloop0  subs  r5,r5,#1
   bne  dloop0
   ldr r9, [r1]                ;     turn_off_led()
                               ;   }
   mov r4, #3                  ;   i = 3
+whilei
   cmp r4, #0                  ;   while (i >= 0)
   blt eWhilei                 ;   {
   mov r5, r4, lsl #2          ;     num_shift = i * 4
@@ -66,15 +67,15 @@ eWhileLed
 eif0                          ;      }
 
   ldr  r5,=4000000            ;     delay(500ms)
-dloop0  subs  r5,r5,#1
-  bne  dloop0
+dloop1  subs  r5,r5,#1
+  bne  dloop1  
   ldr r9, [r1]                ;     turn_off_led()
   sub r4, r4, #1              ;     i--
-  b whliei                    ;   }
+  b whilei                    ;   }
 eWhilei
   ldr  r5,=4000000            ;     delay(500ms)
-dloop0  subs  r5,r5,#1
-  bne  dloop0
+dloop2  subs  r5,r5,#1
+  bne  dloop2
   b whileT                    ; }
 
   END
