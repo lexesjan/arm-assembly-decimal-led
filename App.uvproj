@@ -432,9 +432,9 @@
           <GroupName>Library</GroupName>
           <Files>
             <File>
-              <FileName>EA-LPC2138-EDU-ASM.lib</FileName>
+              <FileName>..\..\Users\lexes\ArmAssemblyProjects\arm-assembly-decimal-led\EA-LPC2138-EDU-ASM.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>.\EA-LPC2138-EDU-ASM.lib</FilePath>
+              <FilePath>$TC_ROOT$\..\..\Users\lexes\ArmAssemblyProjects\arm-assembly-decimal-led\EA-LPC2138-EDU-ASM.lib</FilePath>
             </File>
           </Files>
         </Group>

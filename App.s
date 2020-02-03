@@ -121,7 +121,7 @@ reWhileN
 ;   r0 - the size of the string
 ;
 itoa
-  stmfd sp!, {r4-r6, lr}
+  stmfd sp!, {r4-r9, lr}
   mov r3, r0                    ; r3 = num
   mov r4, r1                    ; r4 = address
   mov r5, #0                    ; i = 0
@@ -167,7 +167,7 @@ itoaeforj
   mov r1, #'\0'                 ; null = '\0'
   strb r1, [r4, r5]             ; result[i] = '\0'
   mov r0, r5                    ; size = i
-  ldmfd sp!, {r4-r6, pc}
+  ldmfd sp!, {r4-r9, pc}
 
 
 ;
