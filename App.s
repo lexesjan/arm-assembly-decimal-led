@@ -19,7 +19,7 @@ IO1CLR  EQU  0xE002801C
   ;
   bl initLed
   ldr r4, =0x40000000
-  ldr r0, =0x80000000
+  ldr r0, =0
   mov r1, r4
   bl itoa
   ldr r7, =0x000f0000         ; led_mask = 0x000f0000
@@ -32,12 +32,12 @@ forchr
   beq eforchr                 ;   {
   mov r0, r6
   bl displayNum               ;     displayNum(*str)
-  bl delay                    ;     delay()
+  ;bl delay                    ;     delay()
   str r7, [r8]                ;     turn_off_leds(P1.19-P1.16)
   ldrb r6, [r5, #1]!
   b forchr                    ;   }
 eforchr
-  bl delay                    ;   delay()
+  ;bl delay                    ;   delay()
   b whileT                    ; }
 
 stop b stop
@@ -130,16 +130,16 @@ itoa
   add r5, r5, #1                ;   i++
 itoaeIf                         ; }
   mov r6, #0                    ; j = 0
-itoaWhileN
-  cmp r3, #0                    ; while (num != 0)
-  beq itoaeWhile                ; {
+itoaWhileN                      ; do {
   mov r0, r3                    ;   numerator = num
   mov r1, #10                   ;   denominator = 10
   bl udiv                       ;   div(num, 10)
   str r1, [sp, #-4]!            ;   push(num % 10)
   mov r3, r0                    ;   num /= 10
   add r6, r6, #1                ;   j++
-  b itoaWhileN                  ; }
+  cmp r3, #0                    ;
+  beq itoaeWhile                ; } while (num != 0)
+  b itoaWhileN
 itoaeWhile
 itoaWhilej
   cmp r6, #0                    ; while (j > 0)
