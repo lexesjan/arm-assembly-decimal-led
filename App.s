@@ -32,12 +32,12 @@ forchr
   beq eforchr                 ;   {
   mov r0, r6
   bl displayNum               ;     displayNum(*str)
-  ;bl delay                    ;     delay()
+  bl delay                    ;     delay()
   str r7, [r8]                ;     turn_off_leds(P1.19-P1.16)
   ldrb r6, [r5, #1]!
   b forchr                    ;   }
 eforchr
-  ;bl delay                    ;   delay()
+  bl delay                    ;   delay()
   b whileT                    ; }
 
 stop b stop
@@ -180,7 +180,7 @@ initLed
 ;   none
 ;
 delay
-  ldr  r0,=4000000
+  ldr  r0,=40000000
 dloop  subs  r0,r0,#1
   bne  dloop
   bx lr
